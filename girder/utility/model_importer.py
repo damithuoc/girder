@@ -17,6 +17,10 @@
 #  limitations under the License.
 ###############################################################################
 
+from girder.models import (
+    api_key, assetstore, collection, file, folder, group, item, notification, password, setting,
+    token, upload, user)
+
 _modelClasses = {}
 
 
@@ -64,3 +68,18 @@ class ModelImporter(object):
     @staticmethod
     def unregisterModel(model, plugin='_core'):
         del _modelClasses[plugin][model]
+
+
+ModelImporter.registerModel('api_key', api_key.ApiKey)
+ModelImporter.registerModel('assetstore', assetstore.Assetstore)
+ModelImporter.registerModel('collection', collection.Collection)
+ModelImporter.registerModel('file', file.File)
+ModelImporter.registerModel('folder', folder.Folder)
+ModelImporter.registerModel('group', group.Group)
+ModelImporter.registerModel('item', item.Item)
+ModelImporter.registerModel('notification', notification.Notification)
+ModelImporter.registerModel('password', password.Password)
+ModelImporter.registerModel('setting', setting.Setting)
+ModelImporter.registerModel('token', token.Token)
+ModelImporter.registerModel('upload', upload.Upload)
+ModelImporter.registerModel('user', user.User)
