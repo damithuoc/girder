@@ -301,7 +301,7 @@ class PythonCliTestCase(base.TestCase):
             self.assertIn('reference_string', query['reference'])
 
         # Create a collection and subfolder
-        resp = self.request('/collection', 'POST', user=self.user, params={
+        resp = self.post('/collection', user=self.user, params={
             'name': 'my_collection'
         })
         self.assertStatusOk(resp)
@@ -473,8 +473,8 @@ class PythonCliTestCase(base.TestCase):
             adapter = session.adapters[gc.urlBase]
             self.assertEqual(adapter.max_retries.total, 5)
 
-        with mock.patch('girder_client.cli.GirderClient.sendRestRequest',
+        with mock.patch('girder_client.cli.GirderClient.request',
                         side_effect=checkRetryHandler) as m:
-            gc.sendRestRequest('')
+            gc.get('')
 
         self.assertTrue(m.called)
